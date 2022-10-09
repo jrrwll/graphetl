@@ -4,11 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Function;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 import lombok.Getter;
-import org.dreamcat.common.util.StreamUtil;
+import org.dreamcat.common.util.MapUtil;
 
 /**
  * @author Jerry Will
@@ -20,9 +17,10 @@ public class Graph implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String jobName;
-    private JobType jobType = JobType.STREAMING;
+    private JobType jobType = JobType.BATCH;
 
     private List<Vertex> vertices;
+    private List<List<Integer>> edges;
     private Set<Integer> sources;
     private Set<Integer> sinks;
 
@@ -30,9 +28,7 @@ public class Graph implements Serializable {
 
     public synchronized Map<Integer, Vertex> getVertexMap() {
         if (vertexMap == null) {
-            // todo vertexMap = StreamUtil.toMap(vertices, Vertex::getId);
-            vertexMap = vertices.stream().collect(Collectors.toMap(
-                    Vertex::getId, Function.identity()));
+            vertexMap = MapUtil.toMap(vertices, Vertex::getId);
         }
         return vertexMap;
     }

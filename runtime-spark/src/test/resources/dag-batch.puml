@@ -1,0 +1,68 @@
+@startuml
+
+title: DAG Example
+
+node "Source-1\n\
+type: Source\n\
+dataType: hive\n\
+connection: clusterName, dbName, tableName, partitions\n\
+operators: date=${date}" as source1 #pink
+
+node "Source-2" as source2 #pink
+
+node "Union-3\n\
+type: SparkUnionOperator\n\
+operators: fields合并行的映射关系字段列表\
+" as union
+source1 -down-> union
+source2 -down-> union
+
+node "Agg-4\n\
+type: Agg\n\
+dataType: Udaf 聚合函数\n\
+operators:\n\
+        group: date, student_id\n\
+        fields: max(score), cnt(distinct gender)\
+" as agg
+union -down-> agg
+
+node "Add-5：在现有列的基础上增加列，\n\
+可用map算子来实现\n\
+type: Add\n\
+dataType: Expr 计算表达式\n\
+operators: new_column: c1 + c2 * c3" as add
+agg -down-> add
+
+node "Filter-6\n\
+type: Filter\n\
+dataType: Row\n\
+operators: c1 > 10 and c2 is null" as filter
+agg -down-> filter
+
+node "Sample-7\n\
+type: data_sample\n\
+sampleType: sample_random 具体采样算法" as sample
+add -down-> sample
+
+node "Sink-9\n\
+可以输出到数据集对应的底表\n\
+type: Load 输出节点\n\
+dataType: hive_dataset 输出到Hive\n\
+connection: 数据源配置" as sink1 #cyan
+sample -down-> sink1
+
+node "Join-10\n\
+type: SparkJoinOperator\n\
+dataType: left 左连接\n\
+operators:\n\
+        joinNodes要连接的节点\n\
+        filters: node1.c1 = node2.c2 连接条件" as join
+add -down-> join
+filter -down-> join
+
+node "Sink-11\n\
+type: Load\n\
+dataType: ch_dataset 输出到ChickHouse" as sink2 #cyan
+join -down-> sink2
+
+@enduml

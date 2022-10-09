@@ -1,0 +1,40 @@
+{
+  "jobName": "Dag Batch Example",
+  "jobType": "BATCH",
+  "vertices": [
+    {
+      "id": 1,
+      "operator": "source",
+      "connectorConf": {
+        "dataType": "mysql",
+        "jdbcDriver": "com.mysql.cj.jdbc.Driver",
+        "jdbcUrl": "jdbc:mysql://localhost:3306?useSSL=false&serverTimezone=UTC",
+        "user": "root",
+        "password": "root",
+        "dbName": "test_db",
+        "tableName": "score"
+      }
+    },
+    {
+      "id": 2,
+      "operator": "source",
+      "connectorConf": {
+        "dataType": "mysql",
+        "jdbcDriver": "com.mysql.cj.jdbc.Driver",
+        "jdbcUrl": "jdbc:mysql://localhost:3306?useSSL=false&serverTimezone=UTC",
+        "user": "root",
+        "password": "root",
+        "dbName": "test_db",
+        "tableName": "student"
+      }
+    }
+  ],
+  "sources": [
+    1,
+    2
+  ],
+  "sink": [
+    9,
+    11
+  ]
+}

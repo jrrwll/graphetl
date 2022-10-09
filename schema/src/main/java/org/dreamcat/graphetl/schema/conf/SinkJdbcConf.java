@@ -1,16 +1,19 @@
-package org.dreamcat.graphetl.connector.params;
+package org.dreamcat.graphetl.schema.conf;
 
 import java.util.Map;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author Jerry Will
- * @version 2022-09-07
+ * @version 2022-10-09
  */
-@Data
-public class JdbcParams {
+@Getter
+@Setter
+public class SinkJdbcConf extends OperatorConf {
 
     private String url;
+    private String driver;
     private String user;
     private String password;
     private String tableName;

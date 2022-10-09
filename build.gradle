@@ -41,6 +41,7 @@ subprojects {
         testAnnotationProcessor "org.openjdk.jmh:jmh-generator-annprocess:$jmhVersion"
 
         implementation "org.dreamcat:common-core:0.3"
+        implementation "org.dreamcat:common-json:0.3"
     }
 
     task printVersion {

@@ -1,0 +1,57 @@
+{
+  "jobName": "Dag Batch Example",
+  "jobType": "BATCH",
+  "vertices": [
+    {
+      "id": 1,
+      "operator": "source_jdbc",
+      "operatorConf": {
+        "driver": "com.mysql.cj.jdbc.Driver",
+        "url": "jdbc:mysql://localhost:3306?useSSL=false&serverTimezone=UTC",
+        "user": "root",
+        "password": "root",
+        "dbName": "test_db",
+        "tableName": "score"
+      }
+    },
+    {
+      "id": 2,
+      "operator": "source_jdbc",
+      "operatorConf": {
+        "driver": "com.mysql.cj.jdbc.Driver",
+        "url": "jdbc:mysql://localhost:3306?useSSL=false&serverTimezone=UTC",
+        "user": "root",
+        "password": "root",
+        "dbName": "test_db",
+        "tableName": "student"
+      }
+    },
+    {
+      "id": 3,
+      "operator": "join",
+      "operatorConf": {
+        "joinType": "inner_join",
+        "on": "$1.student_name = $2.name"
+      }
+    },
+    {
+      "id": 4,
+      "operator": "sink_jdbc",
+      "connectorConf": {
+        "driver": "com.mysql.cj.jdbc.Driver",
+        "url": "jdbc:mysql://localhost:3306?useSSL=false&serverTimezone=UTC",
+        "user": "root",
+        "password": "root",
+        "dbName": "test_db",
+        "tableName": "student"
+      }
+    }
+  ],
+  "sources": [
+    1,
+    2
+  ],
+  "sink": [
+    4
+  ]
+}
