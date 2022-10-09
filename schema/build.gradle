@@ -1,0 +1,10 @@
+ext {
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+    jacksonVersion = '2.13.3'
+}
+
+dependencies {
+    implementation "org.dreamcat:common-core:0.3"
+
+    implementation "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
+}

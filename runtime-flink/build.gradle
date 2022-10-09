@@ -1,0 +1,15 @@
+ext {
+    // https://mvnrepository.com/artifact/org.apache.flink/flink-core
+    // https://mvnrepository.com/artifact/org.apache.flink/flink-table-planner
+    scalaVersion = '2.12'
+    flinkVersion = '1.15.2'
+}
+
+dependencies {
+    implementation project(':schema')
+    implementation project(':connector')
+
+    implementation "org.apache.flink:flink-core:$flinkVersion"
+    implementation "org.apache.flink:flink-streaming-java:$flinkVersion"
+    implementation "org.apache.flink:flink-table-planner_$scalaVersion:$flinkVersion"
+}

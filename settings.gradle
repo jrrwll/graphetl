@@ -1,0 +1,15 @@
+rootProject.name = 'graphetl'
+
+def projects = [
+        'common',
+        'schema',
+        'api',
+        'service',
+        'connector',
+        'runtime-flink',
+        'runtime-spark',
+]
+
+projects.forEach {
+    include it
+}

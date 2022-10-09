@@ -1,0 +1,16 @@
+ext {
+    // https://mvnrepository.com/artifact/org.apache.hbase/hbase-common
+    hbaseVersion = '2.4.13'
+    hadoopVersion = '2.10.0'
+}
+
+dependencies {
+    implementation "org.apache.hbase:hbase-annotations:$hbaseVersion"
+    implementation "org.apache.hbase:hbase-common:$hbaseVersion"
+    implementation "org.apache.hbase:hbase-client:$hbaseVersion"
+    implementation "org.apache.hbase:hbase-server:$hbaseVersion"
+
+    implementation "org.apache.hadoop:hadoop-common:$hadoopVersion"
+
+    runtimeOnly 'mysql:mysql-connector-java:8.0.30'
+}

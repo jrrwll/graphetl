@@ -1,0 +1,16 @@
+ext {
+    // https://mvnrepository.com/artifact/org.apache.spark/spark-core
+    scalaVersion = '2.12'
+    sparkVersion = '3.3.0'
+}
+
+dependencies {
+    implementation project(':schema')
+    implementation project(':connector')
+
+    implementation "org.apache.spark:spark-core_$scalaVersion:$sparkVersion"
+    implementation "org.apache.spark:spark-sql_$scalaVersion:$sparkVersion"
+    implementation "org.apache.spark:spark-hive_$scalaVersion:$sparkVersion"
+    // // https://mvnrepository.com/artifact/org.apache.hive/hive-exec
+    // implementation 'org.apache.hive:hive-exec:2.3.9'
+}

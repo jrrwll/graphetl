@@ -1,0 +1,14 @@
+{
+  "jobType": "BATCH",
+  "vertices": [
+    {
+      "id": 1,
+      "type": "source",
+      "connector":
+    }
+  ],
+  "sources": [
+  ],
+  "sink": [
+  ]
+}
